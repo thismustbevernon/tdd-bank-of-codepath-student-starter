@@ -1,11 +1,12 @@
 import * as React from "react";
-import { axios } from "axios";
 import "./AddTransaction.css";
+import { axios } from "axios";
 
 export default function AddTransaction(props) {
   const handleOnFormFieldChange = (change) => {
-    var val = change.target;
-    props.setForm({ ...props.form, [val.name]: val.value });
+    //implement
+    var tar = change.target;
+    props.setForm({ ...props.form, [tar.name]: tar.value });
   };
 
   return (
@@ -13,9 +14,9 @@ export default function AddTransaction(props) {
       <h2>Add Transaction</h2>
 
       <AddTransactionForm
+        isCreating={props.isCreating}
         handleOnSubmit={props.handleOnSubmit}
         handleOnFormFieldChange={handleOnFormFieldChange}
-        isCreating={props.isCreating}
         form={props.form}
       />
     </div>
@@ -30,27 +31,27 @@ export function AddTransactionForm(props) {
           <label>Description</label>
           <input
             name="description"
+            onChange={props.handleOnFormFieldChange}
             type="text"
             value={props.form ? props.form.description : ""}
-            onChange={props.handleOnFormFieldChange}
           />
         </div>
         <div className="field">
           <label>Category</label>
           <input
             name="category"
+            onChange={props.handleOnFormFieldChange}
             type="text"
             value={props.form ? props.form.category : ""}
-            onChange={props.handleOnFormFieldChange}
           />
         </div>
         <div className="field half-flex">
           <label>Amount (cents)</label>
           <input
             name="amount"
+            onChange={props.handleOnFormFieldChange}
             type="number"
             value={props.form ? props.form.amount : 0}
-            onChange={props.handleOnFormFieldChange}
           />
         </div>
 

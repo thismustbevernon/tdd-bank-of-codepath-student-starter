@@ -1,23 +1,24 @@
-import * as React from "react";
-import FilterInput from "../FilterInput/FilterInput";
-import codepath from "../../assets/codepath.svg";
-import avatar from "../../assets/avatar.png";
-import "./Navbar.css";
+import * as React from "react"
+import FilterInput from "../FilterInput/FilterInput"
+import codepath from "../../assets/codepath.svg"
+import avatar from "../../assets/avatar.png"
 import { Link } from "react-router-dom";
-
-const handleOnInputChange = (change) => {
-  props.setFilterInputValue(change);
-};
+import "./Navbar.css"
 
 export default function Navbar(props) {
-  return (
 
+  const handleOnInputChange = (change) => {
+    props.setFilterInputValue(change.target.value)
+  };
+
+  return (
     <nav className="navbar">
-      {/* <a className="logo">Logo</a> */}
-      <Logo className="Logo" path="/" />
+      <Logo  path="/"/>
+      
+     {/* <a className="logo">Logo</a> */}
 
       <div className="search">
-      <FilterInput inputPutValue={props.filterInputValue} handleOnInputChange = {handleOnInputChange}/>
+        <FilterInput inputValue = {props.filterInputValue} handleOnChange={handleOnInputChange}/>
       </div>
 
       <div className="user">
@@ -34,13 +35,15 @@ export default function Navbar(props) {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
 export function Logo(props) {
   return (
-    <Link to={props.path} className="logo">
+    <a className="logo">
+      <Link to={props.path}>
       <img src={codepath} alt="logo" />
-    </Link>
-  );
+      </Link>
+    </a>
+  )
 }

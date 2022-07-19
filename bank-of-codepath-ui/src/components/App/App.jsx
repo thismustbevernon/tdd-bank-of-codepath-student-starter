@@ -1,26 +1,26 @@
 import * as React from "react";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
+import TransactionDetail from "../TransactionDetail/TransactionDetail";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TransactionDetail from "../TransactionDetail/TransactionDetail";
-
+import { useState } from "react";
 
 export default function App() {
-  // default state handlers
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [transactions, setTransactions] = React.useState([]);
-  const [transfers, setTransfers] = React.useState([]);
-  const [error, setError] = React.useState(null);
-  const [filterInputValue, setFilterInputValue] = React.useState("");
-  const [newTransactionForm, setNewTransactionForm] = React.useState({
-		category: "",
-		description: "",
-		amount: 0,
-	});
-	const [isCreating, setIsCreating] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+  const [transfers, setTransfers] = useState([]);
+  const [error, setError] = useState(null);
+  const [filterInputValue, setFilterInputValue] = useState("");
+  const [newTransactionForm, setNewTransactionForm] = useState({
+    category: "",
+    description: "",
+    amount: 0,
+  });
+  const [isCreating, setIsCreating] = useState(false);
+
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         <Navbar
           filterInputValue={filterInputValue}
@@ -32,14 +32,14 @@ export default function App() {
               path="/"
               element={
                 <Home
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
                   transactions={transactions}
                   setTransactions={setTransactions}
                   transfers={transfers}
                   setTransfers={setTransfers}
                   error={error}
                   setError={setError}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                   filterInputValue={filterInputValue}
                   newTransactionForm={newTransactionForm}
                   setNewTransactionForm={setNewTransactionForm}
@@ -52,7 +52,6 @@ export default function App() {
               path="/transactions/:transactionId"
               element={<TransactionDetail />}
             ></Route>
-            <Route></Route>
           </Routes>
         </main>
       </BrowserRouter>
